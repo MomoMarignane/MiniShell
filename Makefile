@@ -6,7 +6,7 @@ SRC =	lib/my/classic_c_func.c	\
 
 OBJ	=	$(SRC:.c=.o)
 
-NAME	=	my_sh
+NAME	=	mysh
 
 all	:	$(NAME)	$(SRC)
 
