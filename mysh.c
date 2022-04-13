@@ -23,10 +23,10 @@ int minishell(stock_t *stocker, char **env)
         stocker->path[i] = my_fusion_str(stocker->path[i], "/", stocker->total_shell_cmd[0]);
     if (access(stocker->path[i], X_OK) == 0 && access(stocker->path[i], F_OK) == 0) {
         my_exec(stocker->path[i], env, stocker);
-        return 1;
+        return 0;
         }
     }
-    return 0;
+    return 1;
 }
 
 char *clean(char *str)
@@ -48,8 +48,11 @@ int my_sh(stock_t *stocker, char **env)
             return 84;
         }
         stocker->total_shell_cmd = word_to_tab(stocker->buffer, ' ', 0);
-        if (minishell(stocker, env) == 84)
-            return 84;
+        if (minishell(stocker, env) == 1) {
+            write(0, "command not found: ", 19);
+            write(0, stocker->buffer, my_strlen(stocker->buffer)+1);
+            write(0, "\n", 1);
+        }
         write(0, "$> ", 3);
     }
     return 0;
