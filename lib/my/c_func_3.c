@@ -32,8 +32,8 @@ char **word_to_tab(char *str, char c, int i)
     int j = 0, k = 0, size = create_tab(str, c);
     char **tab = (char **)malloc(sizeof(char *) * (size + 1));
     tab[0] = (char *)malloc(sizeof(char));
-    // str = tab_to_space(str);
-    // str = rm_extra_spaces(str);
+    str = tab_to_space(str);
+    str = rm_extra_spaces(str);
     while (str[i] != '\0') {
         if (str[i] == c) {
             i += 1;
@@ -51,7 +51,7 @@ char **word_to_tab(char *str, char c, int i)
 char *tab_to_space(char *str)
 {
     int i = 0;
-    char *cpy = (char *)malloc(sizeof(char));
+    char *cpy = malloc(sizeof(char) * (my_strlen(str) + 1));
     for (; str[i] != '\0'; i += 1) {
         if (str[i] == '\t')
             cpy[i] = ' ';
@@ -65,7 +65,7 @@ char *tab_to_space(char *str)
 char *rm_extra_spaces(char *str)
 {
     int i = 0, j = 0;
-    char *cpy = (char *)malloc(sizeof(char));
+    char *cpy = malloc(sizeof(char) * (my_strlen(str) + 1));
     for (; str[i] == ' '; i += 1);
     for (; str[i] != '\0'; i += 1) {
         if (str[i] == ' ' && str[i - 1] == ' ')
