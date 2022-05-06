@@ -1,15 +1,15 @@
 /*
 ** EPITECH PROJECT, 2021
-** B-PSU-101-MAR-1-1-minishell1-mohamed.mansour
+** B-PSU-210-MAR-2-1-minishell2-mohamed.mansour
 ** File description:
-** c_func_4.c
+** my_fusion_str.c
 */
 
-#include "../../include/minishell.h"
+#include "../include/minishell.h"
 
 char *my_fusion_str(char *src, char *src_2, char *src_3)
 {
-    char *final_str = (char *)malloc(sizeof(char));
+    char *final_str = malloc(sizeof(char) * (my_strlen(src) + my_strlen(src_2) + my_strlen(src_3)) + 1);
     int i = 0;
     if (src == NULL || src_2 == NULL)
         return NULL;
@@ -26,24 +26,4 @@ char *my_fusion_str(char *src, char *src_2, char *src_3)
     }
     final_str[i] = '\0';
     return final_str;
-}
-
-int show_tab(char **tab)
-{
-    for(int i = 0; tab[i] != 0; i += 1)
-        my_putstr(tab[i]), my_putstr("\n");
-    return (0);
-}
-
-void my_exec(char *str, char **env, stock_t *stocker)
-{
-    pid_t pid = fork();
-    int stat = 0;
-    if (pid == -1)
-        perror("fork");
-    else if (pid > 0)
-        waitpid(pid, &stat, 0);
-    else {
-        execve(str, stocker->total_shell_cmd, env);
-    }
 }
