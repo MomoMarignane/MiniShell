@@ -11,6 +11,7 @@ int my_cd(stock_t *stocker)
 {
     if (stocker->total_shell_cmd[2] != NULL && stocker->total_shell_cmd[1] != NULL) {
         write(0, "cd: Too many arguments.", 23);
+        return 1;
     }
     my_get_old_pwd(stocker);
     if (stocker->total_shell_cmd[1] == NULL) {
