@@ -17,7 +17,7 @@ int minishell(stock_t *stocker)
         }
         return 0;
     }
-    if (my_strncmp(stocker->buffer, "cd", 2) == 0) {
+    if (my_strcmp(stocker->total_shell_cmd[0], "cd") == 0) {
         if (my_cd(stocker) == 1)
             return 1;
         return 0;
